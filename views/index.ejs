@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enhanced Form</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Enhanced User Input Form</h1>
+      <% if (errors && errors.length > 0) { %>
+      <div class="error">
+        <% errors.forEach(error => { %>
+        <p><%= error %></p>
+        <% }) %>
+      </div>
+      <% } %>
+      <form id="userForm" action="/submit" method="POST">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="age">Age:</label>
+          <input type="text" id="age" name="age" required />
+        </div>
+        <div class="form-group">
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn">Submit</button>
+      </form>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("userForm");
+
+        form.addEventListener("submit", (e) => {
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const age = document.getElementById("age").value;
+          const message = document.getElementById("message").value;
+
+          if (!name || !email || !age || !message) {
+            alert("All fields are required!");
+            e.preventDefault();
+          }
+
+          if (isNaN(age) || age <= 0) {
+            alert("Please enter a valid age.");
+            e.preventDefault();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
